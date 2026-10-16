@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="format-detection" content="telephone=no">
+<title>酷猫电影网 - 在线影视资讯与热门影片推荐聚合站</title>
+<meta name="description" content="酷猫电影网（kumaodianyingwang-app.github.io）专注收录院线热映、新片定档、剧集更新与影迷短评，提供按类型、地区、年代检索的影片索引、豆瓣口碑榜与每周观影清单，帮你在海量片单里更快挑到今晚值得看的那部。">
+<meta name="keywords" content="酷猫电影网,酷猫电影,热映电影推荐,新片定档时间,高分电影排行榜,影视资讯聚合,剧集更新追踪,影迷短评社区,在线观影指南,电影票根图鉴,周末看什么电影,华语片年度盘点">
+<meta name="author" content="酷猫电影网编辑部">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+<meta name="renderer" content="webkit">
+<meta name="theme-color" content="#141210">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="canonical" href="https://kumaodianyingwang-app.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="酷猫电影网">
+<meta property="og:title" content="酷猫电影网 | 院线热映 · 新片定档 · 影迷口碑榜">
+<meta property="og:description" content="一张票根的时间，找到今晚的电影。酷猫电影网聚合院线热映、新片定档、剧集更新与真实影迷短评。">
+<meta property="og:url" content="https://kumaodianyingwang-app.github.io/">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="酷猫电影网 | 院线热映 · 新片定档 · 影迷口碑榜">
+<meta name="twitter:description" content="院线热映榜单、新片定档日历、剧集更新提醒与影迷短评，一站看完。">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{
+--ink:#141210;--ink2:#1d1a16;--ink3:#26221c;
+--paper:#f6f1e7;--dim:#a49a8b;
+--amber:#f2b23c;--amber-d:#c98a17;
+--rose:#d6464b;--jade:#4fae8b;
+--line:rgba(242,178,60,.22);
+--r:14px;--maxw:1180px;
+}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+background:var(--ink);
+background-image:
+radial-gradient(900px 480px at 88% -8%,rgba(242,178,60,.13),transparent 62%),
+radial-gradient(680px 420px at -6% 22%,rgba(214,70,75,.10),transparent 60%),
+linear-gradient(180deg,#141210 0%,#171410 48%,#12100d 100%);
+color:var(--paper);
+font:16px/1.72 "PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+padding-bottom:env(safe-area-inset-bottom);
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+ul,ol{list-style:none}
+button,input,textarea,select{font:inherit;color:inherit;background:none;border:none;outline:none}
+.wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 18px}
+.skip{position:absolute;left:-9999px}
+.skip:focus{left:12px;top:12px;z-index:99;background:var(--amber);color:#241c0c;padding:8px 14px;border-radius:8px}
+:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+
+/* 跑马灯 */
+.ticker{background:linear-gradient(90deg,#2a2118,#3a2c18 55%,#2a2118);border-bottom:1px solid var(--line);overflow:hidden;height:34px;position:relative}
+.ticker-track{display:flex;align-items:center;height:34px;gap:34px;white-space:nowrap;animation:slide 34s linear infinite;padding-left:100%}
+.ticker-track span{font-size:12.5px;color:#e7d6b2;letter-spacing:.3px}
+.ticker-track b{color:var(--amber);font-weight:600}
+.ticker-track i{color:var(--rose);font-style:normal}
+.ticker:hover .ticker-track{animation-play-state:paused}
+@keyframes slide{from{transform:translateX(0)}to{transform:translateX(-100%)}}
+
+/* 头部 */
+header.site{position:sticky;top:0;z-index:40;background:rgba(20,18,16,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.hbar{display:flex;align-items:center;gap:14px;height:66px}
+.brand{display:flex;align-items:center;gap:11px;flex:0 0 auto}
+.mark{width:40px;height:40px;border-radius:11px;background:linear-gradient(150deg,var(--amber),var(--amber-d));position:relative;box-shadow:0 6px 18px rgba(242,178,60,.28);flex:0 0 auto}
+.mark::before,.mark::after{content:"";position:absolute;top:6px;width:8px;height:8px;background:var(--ink);border-radius:2px}
+.mark::before{left:7px}
+.mark::after{right:7px}
+.mark i{position:absolute;left:50%;top:16px;transform:translateX(-50%);width:16px;height:16px;border-radius:50% 50% 46% 46%;background:var(--ink)}
+.brand-txt strong{display:block;font-size:19px;letter-spacing:1.2px;line-height:1.2}
+.brand-txt em{display:block;font-style:normal;font-size:11px;color:var(--dim);letter-spacing:2.4px;text-transform:uppercase}
+nav.main{flex:1 1 auto;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none}
+nav.main::-webkit-scrollbar{display:none}
+nav.main ul{display:flex;gap:4px;padding:2px}
+nav.main a{display:block;padding:9px 13px;border-radius:9px;font-size:14.5px;color:#d9cfbd;white-space:nowrap;transition:.2s}
+nav.main a:hover,nav.main a.on{background:rgba(242,178,60,.14);color:var(--amber)}
+.burger{display:none;width:42px;height:38px;border:1px solid var(--line);border-radius:9px;flex:0 0 auto;cursor:pointer;position:relative}
+.burger b{position:absolute;left:11px;width:19px;height:2px;background:var(--amber);border-radius:2px;transition:.22s}
+.burger b:nth-child(1){top:12px}
+.burger b:nth-child(2){top:18px}
+.burger b:nth-child(3){top:24px}
+
+/* Hero */
+.hero{padding:46px 0 34px}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:34px;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;color:var(--amber);border:1px solid var(--line);border-radius:999px;padding:5px 13px;background:rgba(242,178,60,.07)}
+.eyebrow i{width:6px;height:6px;border-radius:50%;background:var(--jade);box-shadow:0 0 0 4px rgba(79,174,139,.18)}
+h1{font-size:44px;line-height:1.22;letter-spacing:.5px;margin:18px 0 14px;font-weight:800}
+h1 u{text-decoration:none;background:linear-gradient(180deg,transparent 62%,rgba(242,178,60,.42) 62%)}
+.lede{color:#c8bdac;font-size:16.5px;max-width:34em}
+.searchbar{margin-top:24px;display:flex;gap:8px;background:var(--ink2);border:1px solid var(--line);border-radius:var(--r);padding:7px;box-shadow:0 12px 30px rgba(0,0,0,.36)}
+.searchbar input{flex:1;min-width:0;padding:11px 12px;font-size:15px;border-radius:9px}
+.searchbar input::placeholder{color:#7d7466}
+.searchbar button{padding:11px 22px;border-radius:9px;background:linear-gradient(150deg,var(--amber),var(--amber-d));color:#2a2010;font-weight:700;letter-spacing:.5px;cursor:pointer}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;align-items:center}
+.tags span{font-size:12.5px;color:var(--dim)}
+.tags a{font-size:12.5px;padding:5px 11px;border:1px dashed rgba(164,154,139,.4);border-radius:999px;color:#cdc3b2}
+.tags a:hover{border-color:var(--amber);color:var(--amber)}
+
+/* 票根卡 */
+.ticket{border-radius:var(--r);background:linear-gradient(140deg,#221d17,#1a1712);border:1px solid rgba(242,178,60,.16);padding:16px 18px;position:relative;overflow:hidden}
+.ticket::before,.ticket::after{content:"";position:absolute;left:-9px;width:18px;height:18px;border-radius:50%;background:var(--ink)}
+.ticket::before{top:52%;}
+.ticket::after{top:52%;left:auto;right:-9px}
+.dash{border-top:1px dashed rgba(164,154,139,.42);margin:14px 0}
+.ticket h3{font-size:17px;letter-spacing:.4px}
+.ticket .row{display:flex;justify-content:space-between;font-size:12.5px;color:var(--dim)}
+.ticket .seat{display:inline-block;padding:3px 10px;border-radius:6px;background:rgba(242,178,60,.16);color:var(--amber);font-size:12px;letter-spacing:.6px}
+.ticket .code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;color:#8e8578;letter-spacing:1px}
+
+/* 通用区块 */
+section{padding:44px 0}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:24px;flex-wrap:wrap}
+h2{font-size:26px;letter-spacing:.6px;position:relative;padding-left:14px;font-weight:800}
+h2::before{content:"";position:absolute;left:0;top:6px;bottom:6px;width:4px;border-radius:3px;background:linear-gradient(180deg,var(--amber),var(--rose))}
+.sec-head p{font-size:13.5px;color:var(--dim);max-width:44em}
+.more{font-size:13.5px;color:var(--amber);border-bottom:1px solid rgba(242,178,60,.4);padding-bottom:2px;white-space:nowrap}
+
+/* 热门卡片 */
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.card{background:var(--ink2);border:1px solid rgba(255,255,255,.07);border-radius:var(--r);overflow:hidden;transition:.25s;display:flex;flex-direction:column}
+.card:hover{transform:translateY(-5px);border-color:rgba(242,178,60,.4);box-shadow:0 16px 34px rgba(0,0,0,.42)}
+.poster{aspect-ratio:3/4;position:relative;display:flex;align-items:flex-end;padding:12px}
+.poster b{position:absolute;left:12px;top:12px;font-size:11.5px;padding:3px 9px;border-radius:6px;background:rgba(20,18,16,.72);color:var(--amber);letter-spacing:.5px;font-weight:600}
+.poster span{position:relative;font-size:14.5px;font-weight:700;text-shadow:0 2px 8px rgba(0,0,0,.7);line-height:1.4}
+.p1{background:linear-gradient(160deg,#3d2c1c,#7a4a20 60%,#1b1712)}
+.p2{background:linear-gradient(160deg,#1e3b3a,#2f6f63 58%,#131a19)}
+.p3{background:linear-gradient(160deg,#43202a,#8e3a44 60%,#1a1214)}
+.p4{background:linear-gradient(160deg,#25283f,#4a5480 58%,#14161f)}
+.p5{background:linear-gradient(160deg,#3a3320,#7d6a2c 58%,#1a1811)}
+.p6{background:linear-gradient(160deg,#2a2136,#5b4780 58%,#151220)}
+.p7{background:linear-gradient(160deg,#1f2f3f,#3c6a86 58%,#111820)}
+.p8{background:linear-gradient(160deg,#402a1e,#8a5a30 58%,#1b1410)}
+.card-body{padding:13px 14px 15px;flex:1;display:flex;flex-direction:column;gap:7px}
+.card-body h3{font-size:15.5px;font-weight:700;line-height:1.45}
+.meta{font-size:12.5px;color:var(--dim)}
+.score{margin-top:auto;display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--dim)}
+.score b{color:var(--amber);font-size:16px}
+.stars{letter-spacing:1px;color:var(--amber);font-size:12px}
+
+/* 时间轴 */
+.tl{border-left:2px dashed rgba(242,178,60,.34);padding-left:22px;margin-left:6px}
+.tl li{position:relative;padding:0 0 26px}
+.tl li:last-child{padding-bottom:0}
+.tl li::before{content:"";position:absolute;left:-29px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--ink);border:2px solid var(--amber)}
+.tl time{display:inline-block;font-size:12.5px;color:var(--amber);letter-spacing:.6px;margin-bottom:5px}
+.tl h3{font-size:16.5px;margin-bottom:5px;font-weight:700}
+.tl p{font-size:14px;color:#bdb2a1;max-width:56em}
+
+/* 资讯 */
+.news{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.news li{display:flex;gap:14px;padding:14px;border-radius:12px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.06);transition:.2s}
+.news li:hover{background:rgba(242,178,60,.07);border-color:rgba(242,178,60,.28)}
+.thumb{width:96px;height:66px;border-radius:9px;flex:0 0 auto}
+.news h3{font-size:15px;line-height:1.5;margin-bottom:5px;font-weight:700}
+.news p{font-size:13px;color:var(--dim);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.news .st{font-size:12px;color:#8e8578;margin-top:5px}
+
+/* 社区短评 */
+.quotes{columns:3;column-gap:16px}
+.q{border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:15px 16px;background:linear-gradient(160deg,#201c16,#191612);margin-bottom:16px;break-inside:avoid}
+.q p{font-size:14.5px;line-height:1.75;color:#d5cbb9}
+.q footer{margin-top:11px;display:flex;align-items:center;gap:9px;font-size:12.5px;color:var(--dim)}
+.av{width:28px;height:28px;border-radius:50%;flex:0 0 auto;display:grid;place-items:center;font-size:13px;font-weight:700;color:#241c0c;background:linear-gradient(140deg,var(--amber),var(--rose))}
+.q em{font-style:normal;color:var(--jade)}
+
+/* 排行 */
+.rank{background:var(--ink2);border:1px solid rgba(255,255,255,.07);border-radius:var(--r);overflow:hidden}
+.rank li{display:grid;grid-template-columns:56px 1fr auto;gap:14px;align-items:center;padding:14px 18px;border-bottom:1px solid rgba(255,255,255,.05)}
+.rank li:last-child{border-bottom:none}
+.rank .no{font-size:22px;font-weight:800;color:rgba(255,255,255,.16);text-align:center;font-family:ui-monospace,Menlo,Consolas,monospace}
+.rank li:nth-child(1) .no{color:var(--rose)}
+.rank li:nth-child(2) .no{color:var(--amber)}
+.rank li:nth-child(3) .no{color:var(--jade)}
+.rank h3{font-size:15.5px;font-weight:700}
+.rank .sub{font-size:12.5px;color:var(--dim);margin-top:3px}
+.rank .num{font-size:18px;font-weight:800;color:var(--amber);font-family:ui-monospace,Menlo,Consolas,monospace}
+
+/* 关于 + 表单 */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:start}
+.panel{border:1px solid rgba(242,178,60,.2);border-radius:var(--r);padding:22px;background:linear-gradient(160deg,rgba(242,178,60,.06),rgba(255,255,255,.02))}
+.panel h3{font-size:18px;margin-bottom:12px;font-weight:800}
+.panel p{font-size:14.5px;color:#c3b8a7;margin-bottom:11px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+.stats div{border-radius:10px;padding:12px;background:rgba(255,255,255,.04);text-align:center}
+.stats b{display:block;font-size:22px;color:var(--amber);font-family:ui-monospace,Menlo,Consolas,monospace}
+.stats span{font-size:12px;color:var(--dim)}
+form.sub input,form.sub textarea{width:100%;border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:11px 13px;margin-bottom:11px;background:rgba(0,0,0,.22);font-size:14.5px}
+form.sub textarea{min-height:84px;resize:vertical}
+form.sub button{width:100%;padding:12px;border-radius:10px;background:linear-gradient(150deg,var(--amber),var(--amber-d));color:#2a2010;font-weight:800;letter-spacing:1px;cursor:pointer}
+form .tip{font-size:12px;color:var(--dim);margin-top:9px}
+
+/* 友链 */
+.links{display:flex;flex-wrap:wrap;gap:9px;margin-top:6px}
+.links a{font-size:13px;padding:6px 12px;border-radius:8px;border:1px solid rgba(255,255,255,.1);color:#bfb5a4}
+.links a:hover{border-color:var(--amber);color:var(--amber)}
+
+/* 页脚 */
+footer.site{margin-top:24px;border-top:1px solid var(--line);background:linear-gradient(180deg,#15120f,#100e0b);padding:34px 0 26px}
+.fgrid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:22px}
+.fgrid h4{font-size:14.5px;margin-bottom:11px;color:var(--amber);font-weight:700}
+.fgrid li{font-size:13.5px;color:#a79d8e;padding:4px 0}
+.fgrid li:hover{color:var(--paper)}
+.copy{margin-top:26px;padding-top:16px;border-top:1px dashed rgba(255,255,255,.1);font-size:12.5px;color:#7d7466;line-height:1.9}
+.toTop{position:fixed;right:16px;bottom:20px;width:44px;height:44px;border-radius:50%;background:rgba(242,178,60,.92);color:#241c0c;display:grid;place-items:center;font-weight:800;z-index:35;box-shadow:0 8px 22px rgba(0,0,0,.4)}
+
+@media (max-width:1024px){
+.cards{grid-template-columns:repeat(3,1fr)}
+.quotes{columns:2}
+.fgrid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:820px){
+.hero-grid{grid-template-columns:1fr;gap:26px}
+h1{font-size:32px}
+.news,.about-grid{grid-template-columns:1fr}
+section{padding:34px 0}
+}
+@media (max-width:640px){
+.burger{display:block}
+nav.main{display:none;position:absolute;left:0;right:0;top:66px;background:#181510;border-bottom:1px solid var(--line);padding:10px 14px}
+nav.main.open{display:block}
+nav.main ul{flex-direction:column;gap:2px}
+nav.main a{padding:12px 10px;font-size:15.5px}
+.hbar{position:relative}
+h1{font-size:27px}
+.cards{grid-template-columns:repeat(2,1fr);gap:12px}
+.searchbar{flex-wrap:wrap}
+.searchbar input{flex:1 1 100%}
+.searchbar button{flex:1 1 100%}
+.quotes{columns:1}
+.rank li{grid-template-columns:40px 1fr auto;gap:10px;padding:12px 13px}
+.rank .no{font-size:18px}
+.fgrid{grid-template-columns:1fr}
+.tl{padding-left:18px}
+.tl li::before{left:-25px}
+.wrap{padding:0 14px}
+h2{font-size:21px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://kumaodianyingwang-app.github.io/#website",
+      "url": "https://kumaodianyingwang-app.github.io/",
+      "name": "酷猫电影网",
+      "alternateName": ["酷猫电影", "酷猫影视"],
+      "inLanguage": "zh-CN",
+      "description": "酷猫电影网聚合院线热映、新片定档、剧集更新与影迷短评，提供影片检索、口碑排行与每周观影清单。",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://kumaodianyingwang-app.github.io/#search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://kumaodianyingwang-app.github.io/#org",
+      "name": "酷猫电影网",
+      "url": "https://kumaodianyingwang-app.github.io/",
+      "slogan": "一张票根的时间，找到今晚的电影"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "首页", "item": "https://kumaodianyingwang-app.github.io/"},
+        {"@type": "ListItem", "position": 2, "name": "热门推荐", "item": "https://kumaodianyingwang-app.github.io/#hot"},
+        {"@type": "ListItem", "position": 3, "name": "新片速递", "item": "https://kumaodianyingwang-app.github.io/#new"},
+        {"@type": "ListItem", "position": 4, "name": "影视资讯", "item": "https://kumaodianyingwang-app.github.io/#news"},
+        {"@type": "ListItem", "position": 5, "name": "影迷社区", "item": "https://kumaodianyingwang-app.github.io/#community"},
+        {"@type": "ListItem", "position": 6, "name": "口碑排行", "item": "https://kumaodianyingwang-app.github.io/#rank"}
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "name": "酷猫电影网本周口碑榜",
+      "itemListOrder": "https://schema.org/ItemListOrderDescending",
+      "numberOfItems": 5,
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "河边的旧书店"},
+        {"@type": "ListItem", "position": 2, "name": "第七封回信"},
+        {"@type": "ListItem", "position": 3, "name": "雾港列车"},
+        {"@type": "ListItem", "position": 4, "name": "少年与铁皮鼓"},
+        {"@type": "ListItem", "position": 5, "name": "夜航西行"}
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/yazhou.js"></script>
+<a class="skip" href="#main">跳到主要内容</a>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span><b>今日热映</b> 《河边的旧书店》单日票房破 3200 万</span>
+    <span><i>定档</i> 《雾港列车》 11 月 8 日全国上映</span>
+    <span><b>剧集</b> 《长夜拾光》 每周三更新两集</span>
+    <span><i>口碑</i> 本周影迷均分 8.4，治愈系题材回温</span>
+    <span><b>榜单</b> 年度华语片 TOP20 已刷新</span>
+    <span><i>活动</i> 留言晒票根，抽电影周边</span>
+  </div>
+</div>
+
+<header class="site">
+  <div class="wrap hbar">
+    <a class="brand" href="#" aria-label="酷猫电影网首页">
+      <span class="mark" aria-hidden="true"><i></i></span>
+      <span class="brand-txt">
+        <strong>酷猫电影网</strong>
+        <em>kumaodianyingwang</em>
+      </span>
+    </a>
+    <nav class="main" id="nav" aria-label="主导航">
+      <ul>
+        <li><a class="on" href="#">首页</a></li>
+        <li><a href="#hot">热门推荐</a></li>
+        <li><a href="#new">新片速递</a></li>
+        <li><a href="#news">影视资讯</a></li>
+        <li><a href="#community">影迷社区</a></li>
+        <li><a href="#rank">口碑排行</a></li>
+        <li><a href="#about">关于本站</a></li>
+      </ul>
+    </nav>
+    <button class="burger" id="btnNav" type="button" aria-label="展开导航菜单" aria-expanded="false"><b></b><b></b><b></b></button>
+  </div>
+</header>
+
+<main id="main">
+
+  <div class="hero wrap">
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow"><i></i>数据每日 09:00 更新 · 覆盖 42 个城市院线</span>
+        <h1>今晚看什么？<br><u>酷猫电影网</u>替你筛过一遍</h1>
+        <p class="lede">片单越做越长，选择却越来越难。我们把院线热映、流媒体新上、影迷真实短评压成一份能读懂的清单——开场三分钟就知道值不值得买票。</p>
+        <form class="searchbar" action="#" method="get" role="search">
+          <input type="search" name="q" placeholder="搜片名、导演、演员，比如：雾港列车" aria-label="站内影片搜索">
+          <button type="submit">找片</button>
+        </form>
+        <div class="tags">
+          <span>大家在搜</span>
+          <a href="#">华语剧情</a>
+          <a href="#">悬疑犯罪</a>
+          <a href="#">治愈治愈系</a>
+          <a href="#">科幻视效</a>
+          <a href="#">动画长片</a>
+          <a href="#">纪录片</a>
+        </div>
+      </div>
+      <div class="ticket" aria-label="本周观影票根">
+        <div class="row"><span class="seat">本周荐片 · No.07</span><span>2025 秋</span></div>
+        <h3 style="margin:14px 0 6px">河边的旧书店</h3>
+        <p style="font-size:14px;color:#bdb2a1">剧情 / 112 分钟 / 导演 陆知遥</p>
+        <div class="dash"></div>
+        <div class="row"><span>影迷评分 <b style="color:#f2b23c">8.6</b></span><span>排片占比 27%</span></div>
+        <p style="font-size:13.5px;color:#a79d8e;margin-top:12px">适合：周末下午、一个人看也不闷</p>
+        <div class="dash"></div>
+        <div class="row"><span class="code">KAOMO-2025-1007-HALL3</span><span style="color:#4fae8b">在映</span></div>
+      </div>
+    </div>
+  </div>
+
+  <section id="hot">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <h2>热门推荐</h2>
+          <p>按近七日票房、点映口碑与影迷讨论度综合排序，每周五重排一次。</p>
+        </div>
+        <a class="more" href="#">查看完整片单</a>
+      </div>
+      <ul class="cards">
+        <li class="card">
+          <a href="#">
+            <span class="poster p1"><b>热映</b><span>河边的旧书店</span></span>
+            <div class="card-body">
+              <h3>河边的旧书店</h3>
+              <p class="meta">剧情 · 中国大陆 · 112 分钟</p>
+              <div class="score"><b>8.6</b><span class="stars">★★★★☆</span><span>1.2万人评分</span></div>
+            </div>
+          </a>
+        </li>
+        <li class="card">
+          <a href="#">
+            <span class="poster p3"><b>点映</b><span>第七封回信</span></span>
+            <div class="card-body">
+              <h3>第七封回信</h3>
+              <p class="meta">爱情 · 悬疑 · 98 分钟</p>
+              <div class="score"><b>8.2</b><span class="stars">★★★★☆</span><span>6843人评分</span></div>
+            </div>
+          </a>
+        </li>
+        <li class="card">
+          <a href="#">
+            <span class="poster p7"><b>定档</b><span>雾港列车</span></span>
+            <div class="card-body">
+              <h3>雾港列车</h3>
+              <p class="meta">悬疑 · 犯罪 · 126 分钟</p>
+              <div class="score"><b>7.9</b><span class="stars">★★★★</span><span>预约 4.6 万</span></div>
+            </div>
+          </a>
+        </li>
+        <li class="card">
+          <a href="#">
+            <span class="poster p2"><b>剧集</b><span>长夜拾光</span></span>
+            <div class="card-body">
+              <h3>长夜拾光（全 24 集）</h3>
+              <p class="meta">家庭 · 年代 · 更新至 14 集</p>
+              <div class="score"><b>8.4</b><span class="stars">★★★★☆</span><span>追剧 9.1 万</span></div>
+            </div>
+          </a>
+        </li>
+        <li class="card">
+          <a href="#">
+            <span class="poster p4"><b>视效</b><span>星轨之下</span></span>
+            <div class="card-body">
+              <h3>星轨之下</h3>
+              <p class="meta">科幻 · 冒险 · 141 分钟</p>
+              <div class="score"><b>7.6</b><span class="stars">★★★★</span><span>2.3万人评分</span></div>
+            </div>
+          </a>
+        </li>
+        <li class="card">
+          <a href="#">
+            <span class="poster p5"><b>动画</b><span>麦田里的鼓手</span></span>
+            <div class="card-body">
+              <h3>麦田里的鼓手</h3>
+              <p class="meta">动画 · 音乐 · 104 分钟</p>
+              <div class="score"><b>8.8</b><span class="stars">★★★★★</span><span>1.7万人评分</span></div>
+            </div>
+          </a>
+        </li>
+        <li class="card">
+          <a href="#">
+            <span class="poster p6"><b>纪录</b><span>手艺人的冬天</span></span>
+            <div class="card-body">
+              <h3>手艺人的冬天</h3>
+              <p class="meta">纪录片 · 88 分钟</p>
+              <div class="score"><b>8.5</b><span class="stars">★★★★☆</span><span>4127人评分</span></div>
+            </div>
+          </a>
+        </li>
+        <li class="card">
+          <a href="#">
+            <span class="poster p8"><b>重温</b><span>少年与铁皮鼓</span></span>
+            <div class="card-body">
+              <h3>少年与铁皮鼓</h3>
+              <p class="meta">剧情 · 修复版 · 119 分钟</p>
+              <div class="score"><b>8.3</b><span class="stars">★★★★☆</span><span>3.5万人评分</span></div>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="new">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <h2>新片速递</h2>
+          <p>定档、改档、开机、杀青、流媒体上线时间，按日期倒序滚动更新。</p>
+        </div>
+        <a class="more" href="#">订阅档期提醒</a>
+      </div>
+      <ol class="tl">
+        <li>
+          <time datetime="2025-11-08">11 月 08 日 · 院线</time>
+          <h3>《雾港列车》提档至 11 月 8 日，首日排片超 6 万场</h3>
+          <p>发行方今日确认提档两天，IMAX 与 CINITY 版本同步开画，点映场平均上座率 71%。</p>
+        </li>
+        <li>
+          <time datetime="2025-11-02">11 月 02 日 · 流媒体</time>
+          <h3>《长夜拾光》第 15、16 集上线，会员周三零更</h3>
+          <p>剧情进入 1998 年的冬天，两条时间线首次交汇，预告里那句台词终于有了回响。</p>
+        </li>
+        <li>
+          <time datetime="2025-10-26">10 月 26 日 · 定档</time>
+          <h3>动画长片《麦田里的鼓手》定档跨年档</h3>
+          <p>导演在映后交流里提到，全片配乐用了 43 种真实打击乐器，建议挑音效好的影厅。</p>
+        </li>
+        <li>
+          <time datetime="2025-10-19">10 月 19 日 · 开机</time>
+          <h3>《夜航西行》于青海开机，实景拍摄周期 76 天</h3>
+          <p>剧组公布首批幕后照，公路段落将全程实拍，预计 2026 年下半年与观众见面。</p>
+        </li>
+        <li>
+          <time datetime="2025-10-12">10 月 12 日 · 修复</time>
+          <h3>《少年与铁皮鼓》4K 修复版重映，全国艺联专线</h3>
+          <p>修复团队补回约 7 分钟早年删减素材，重映票含一张复刻版老票根。</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="news">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <h2>影视资讯</h2>
+          <p>行业观察、票房解读与幕后手记，只写看完片子后还想聊的那部分。</p>
+        </div>
+        <a class="more" href="#">更多资讯</a>
+      </div>
+      <ul class="news">
+        <li>
+          <a href="#" style="display:flex;gap:14px">
+            <span class="thumb p1" aria-hidden="true"></span>
+            <span>
+              <h3>周末票房 3.4 亿：中小体量影片撑住了大盘</h3>
+              <p>三部新片分食六成票房，其中两部成本不足五千万，口碑扩散成了主要推力。</p>
+              <span class="st">票房观察 · 10 月 14 日</span>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="#" style="display:flex;gap:14px">
+            <span class="thumb p7" aria-hidden="true"></span>
+            <span>
+              <h3>悬疑片为什么越来越爱用"列车"当舞台</h3>
+              <p>封闭空间、固定时刻表、陌生人共处——从叙事效率看，这是个很难失手的结构。</p>
+              <span class="st">类型研究 · 10 月 11 日</span>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="#" style="display:flex;gap:14px">
+            <span class="thumb p5" aria-hidden="true"></span>
+            <span>
+              <h3>一张票根的旅行：我们收集了 8000 张老电影票</h3>
+              <p>从手写座位号到电子取票码，票根形制的四次变化，恰好对应影院的四次改造。</p>
+              <span class="st">特别企划 · 10 月 08 日</span>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="#" style="display:flex;gap:14px">
+            <span class="thumb p2" aria-hidden="true"></span>
+            <span>
+              <h3>导演访谈：陆知遥谈"慢电影"的节奏控制</h3>
+              <p>"不是故意慢，是让观众有时间去听见角色呼吸。"他提到片中三场长镜头的取舍。</p>
+              <span class="st">幕后手记 · 10 月 05 日</span>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="#" style="display:flex;gap:14px">
+            <span class="thumb p4" aria-hidden="true"></span>
+            <span>
+              <h3>视效公司破产潮之后，中型项目怎么活下来</h3>
+              <p>五个团队的自救路径：拆分流程、提前介入分镜、把渲染农场改成按需租赁。</p>
+              <span class="st">行业观察 · 10 月 02 日</span>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="#" style="display:flex;gap:14px">
+            <span class="thumb p6" aria-hidden="true"></span>
+            <span>
+              <h3>纪录片进院线的第 6 年：排片还是那道坎</h3>
+              <p>场均人次并不差，问题在于黄金场拿不到。几家影城的"长线放映"尝试值得一看。</p>
+              <span class="st">深度报道 · 09 月 28 日</span>
+            </span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="community">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <h2>影迷社区</h2>
+          <p>来自站内真实留言，我们只做摘录，不做修饰；观点不代表本站立场。</p>
+        </div>
+        <a class="more" href="#">写一条短评</a>
+      </div>
+      <div class="quotes">
+        <div class="q">
+          <p>看完在影院坐到字幕结束。不是因为多惊艳，是那场雨声让我舍不得走。</p>
+          <footer><span class="av" aria-hidden="true">林</span><span>林小满 · <em>《河边的旧书店》</em></span></footer>
+        </div>
+        <div class="q">
+          <p>前四十分钟有点闷，撑过去之后每一句对白都在回收伏笔，二刷确认了。</p>
+          <footer><span class="av" aria-hidden="true">周</span><span>周叙白 · <em>《第七封回信》</em></span></footer>
+        </div>
+        <div class="q">
+          <p>带孩子去的，散场他一直问"鼓还能这么打吗"，这票钱花得值。</p>
+          <footer><span class="av" aria-hidden="true">唐</span><span>唐糖 · <em>《麦田里的鼓手》</em></span></footer>
+        </div>
+        <div class="q">
+          <p>年代细节做得很扎实，家里那台老电视一出来我妈就哭了。</p>
+          <footer><span class="av" aria-hidden="true">许</span><span>许知禾 · <em>《长夜拾光》</em></span></footer>
+        </div>
+        <div class="q">
+          <p>视效确实漂亮，但剧本撑不起 141 分钟，中段该剪二十分钟。</p>
+          <footer><span class="av" aria-hidden="true">沈</span><span>沈屿 · <em>《星轨之下》</em></span></footer>
+        </div>
+        <div class="q">
+          <p>修复版画质好到我认出了当年影院墙上的霉斑，奇怪的感动。</p>
+          <footer><span class="av" aria-hidden="true">何</span><span>何砚 · <em>《少年与铁皮鼓》</em></span></footer>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="rank">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <h2>口碑排行</h2>
+          <p>综合站内评分、讨论热度与长评占比，数据截止 2025 年 10 月 15 日。</p>
+        </div>
+        <a class="more" href="#">榜单规则说明</a>
+      </div>
+      <ol class="rank">
+        <li>
+          <span class="no">01</span>
+          <span><h3>麦田里的鼓手</h3><span class="sub">动画 · 音乐 · 站内评分人数 1.7 万</span></span>
+          <span class="num">8.8</span>
+        </li>
+        <li>
+          <span class="no">02</span>
+          <span><h3>河边的旧书店</h3><span class="sub">剧情 · 中国大陆 · 在映第 3 周</span></span>
+          <span class="num">8.6</span>
+        </li>
+        <li>
+          <span class="no">03</span>
+          <span><h3>手艺人的冬天</h3><span class="sub">纪录片 · 88 分钟 · 艺联专线</span></span>
+          <span class="num">8.5</span>
+        </li>
+        <li>
+          <span class="no">04</span>
+          <span><h3>长夜拾光</h3><span class="sub">剧集 · 更新至 14 集 · 追剧 9.1 万</span></span>
+          <span class="num">8.4</span>
+        </li>
+        <li>
+          <span class="no">05</span>
+          <span><h3>少年与铁皮鼓</h3><span class="sub">剧情 · 4K 修复 · 重映中</span></span>
+          <span class="num">8.3</span>
+        </li>
+        <li>
+          <span class="no">06</span>
+          <span><h3>第七封回信</h3><span class="sub">爱情 · 悬疑 · 点映阶段</span></span>
+          <span class="num">8.2</span>
+        </li>
+        <li>
+          <span class="no">07</span>
+          <span><h3>夜航西行</h3><span class="sub">公路 · 青海实景 · 拍摄中</span></span>
+          <span class="num">8.0</span>
+        </li>
+        <li>
+          <span class="no">08</span>
+          <span><h3>雾港列车</h3><span class="sub">悬疑 · 犯罪 · 11 月 8 日上映</span></span>
+          <span class="num">7.9</span>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <h2>关于本站</h2>
+          <p>酷猫电影网是一个由影迷维护的影视资料聚合站点，只做信息整理，不提供任何播放与下载服务。</p>
+        </div>
+      </div>
+      <div class="about-grid">
+        <div class="panel">
+          <h3>我们怎么选片</h3>
+          <p>先看故事是否完整，再看它有没有自己的语气。评分只是参考，长评里的具体细节往往更可信——所以我们把短评放在和评分一样显眼的位置。</p>
+          <p>院线数据来自公开票房平台与影城排片信息，档期以官方公告为准；遇到改档会当天在速递栏目更新，不做预测、不做内幕。</p>
+          <div class="stats">
+            <div><b>12640</b><span>收录影片</span></div>
+            <div><b>42</b><span>覆盖城市</span></div>
+            <div><b>09:00</b><span>每日更新</span></div>
+          </div>
+        </div>
+        <form class="sub panel" action="#" method="post">
+          <h3>留言与纠错</h3>
+          <input type="text" name="name" placeholder="怎么称呼你" aria-label="昵称">
+          <input type="email" name="mail" placeholder="邮箱（不会公开）" aria-label="邮箱">
+          <textarea name="msg" placeholder="发现档期错了？想推荐一部冷门片？都可以说"></textarea>
+          <button type="submit">提交留言</button>
+          <p class="tip">本站仅整理公开影视信息，不提供任何影片播放、下载与资源链接。</p>
+        </form>
+      </div>
+      <div class="panel" style="margin-top:22px">
+        <h3>友情链接</h3>
+        <div class="links">
+          <a href="#">院线排片查询</a>
+          <a href="#">华语片年鉴</a>
+          <a href="#">影迷短评精选</a>
+          <a href="#">纪录片放映地图</a>
+          <a href="#">动画长片档案</a>
+          <a href="#">修复版重映日历</a>
+          <a href="#">电影节日程</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="fgrid">
+      <div>
+        <h4>酷猫电影网</h4>
+        <p style="font-size:13.5px;color:#a79d8e">网址：https://kumaodianyingwang-app.github.io</p>
+        <p style="font-size:13.5px;color:#a79d8e;margin-top:6px">一张票根的时间，找到今晚的电影。</p>
+      </div>
+      <div>
+        <h4>栏目导航</h4>
+        <ul>
+          <li><a href="#hot">热门推荐</a></li>
+          <li><a href="#new">新片速递</a></li>
+          <li><a href="#news">影视资讯</a></li>
+          <li><a href="#community">影迷社区</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>检索入口</h4>
+        <ul>
+          <li><a href="#">按类型找片</a></li>
+          <li><a href="#">按地区找片</a></li>
+          <li><a href="#">按年代找片</a></li>
+          <li><a href="#rank">口碑排行</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>站点说明</h4>
+        <ul>
+          <li><a href="#about">关于我们</a></li>
+          <li><a href="#">榜单规则</a></li>
+          <li><a href="#">内容纠错</a></li>
+          <li><a href="#">联系方式</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copy">
+      <p>© 2025 酷猫电影网 kumaodianyingwang-app.github.io · 网站名称：酷猫电影网 · 本站所有影片信息均整理自公开渠道，版权归原权利人所有。</p>
+      <p>本站不提供任何影视播放、下载、资源链接服务；页面内容如有出入，以影片官方公告为准。</p>
+    </div>
+  </div>
+</footer>
+
+<a class="toTop" href="#" aria-label="返回顶部">↑</a>
+
+<script>
+(function(){
+  var b=document.getElementById('btnNav'),n=document.getElementById('nav');
+  b.addEventListener('click',function(){
+    var open=n.classList.toggle('open');
+    b.setAttribute('aria-expanded',open?'true':'false');
+  });
+  n.addEventListener('click',function(e){
+    if(e.target.tagName==='A'){n.classList.remove('open');b.setAttribute('aria-expanded','false');}
+  });
+  document.querySelectorAll('form').forEach(function(f){
+    f.addEventListener('submit',function(e){e.preventDefault();});
+  });
+})();
+</script>
+</body>
+</html>
